@@ -72,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("UserAge", 22);
         editor.commit();
 
+        // have class variables
+        // use method to update
+        // needs a running thing to loop
+        // then if app changes
+        // then update SharedPreferences file needs a delimiter (separating characters)
+        // be able to read back into program
+        // use toast to double check
+
 
         // front end start
 
@@ -120,9 +128,11 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void getCurrentApp() {
-        //get app for everyone second
-        //track duration
-        //once app changes, write to a file
+        //get current foreground app
+        //get foreground app used 1 second ago
+        //if they match, add to duration
+        //else, print pastApp, duration, and firstTimeStamp to SharedPreferences file.
+
         float startTime = 0;
         int duration = 1000; //in milliseconds, starts at one second
         String currentName = "NULL";
@@ -131,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
         UsageStatsManager usm = (UsageStatsManager)this.getSystemService(USAGE_STATS_SERVICE);
         long currentTime = System.currentTimeMillis();
         long pastTime = System.currentTimeMillis() - 1000;
-        //Get the latest app foreground app.
+
+        //Get the latest app foreground app (one second ago)
         List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  currentTime - 1000*1000, pastTime); //Currently gets last thousand seconds to pastTime (one second ago) (interval, begin, end)
         if (appList != null && appList.size() > 0) {
             SortedMap<Long, UsageStats> mySortedMap = new TreeMap<Long, UsageStats>();
@@ -145,8 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //get the current app
-        //does this work the way im thinking? (will just update the list?) or do i need to make a new list
-        appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  currentTime - 1000*1000, currentTime);
+        appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,  currentTime - 1000*1000, currentTime); //does this work the way im thinking? (will just update the list?) or do i need to make a new list
         SortedMap<Long, UsageStats> mySortedMap = new TreeMap<Long, UsageStats>();
         for (UsageStats usageStats : appList) {
             mySortedMap.put(usageStats.getLastTimeUsed(), usageStats); //sorts by lastTimeUsed
@@ -157,16 +167,13 @@ public class MainActivity extends AppCompatActivity {
             startTime = mySortedMap.get( mySortedMap.lastKey() ).getFirstTimeStamp();
         }
 
+        //commpare the two apps.
         if (currentName.equals(lastName)) {
-
-        } else {
             duration+=1000;
+        } else {
+            //return name, duration, and firstTimeStamp or maybe just have no else
         }
 
-        //get current foreground app
-        //get foreground app used 1 second ago
-        //if they match, add to duration
-        //else, print pastApp, duration, and firstTimeStamp to SharedPreferences file.
     }
 
     public void CheckLastAppToCurrent() {
@@ -174,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         String lastName = "NULL";
         float startTime = 0;
         String currentName = "NULL";
-
     }
 
     private String printForegroundTask() {
