@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Addictive Experiences</string>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="blue">#0000FF</color>
+</resources>

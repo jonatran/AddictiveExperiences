@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/baseLayout"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/list_item_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- what's the width of the device? thought about match parent but then would the blocks end at same margin? -->
+    <RelativeLayout
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:layout_width="360dp"
+        android:id="@+id/dummyParent"
+        android:layout_toEndOf="@+id/list_item_string"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_toRightOf="@+id/list_item_string"/>
+
+
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:onClick="onDelete"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/delete_btn"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:text="Add" />
+
+</RelativeLayout>
